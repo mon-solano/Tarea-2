@@ -1,0 +1,17 @@
+site_name: Cuadratura Gaussiana
+theme:
+  name: material
+
+nav:
+  - Introducción: index.md
+  - Método Numérico: explanation.md
+  - Tutorial: tutorials.md
+  - Referencia: reference.md
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+site_name: My Docs
