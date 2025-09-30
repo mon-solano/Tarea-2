@@ -1,13 +1,62 @@
 import numpy as np
 
 def Integrando(x):
+
+    """
+    Función a integrar:
+
+    Args:
+        x (float o np.ndarray): Valor de x.
+
+    Returns:
+        float o np.ndarray: Resultado de x**6 - x**2 * sin(2*x).
+
+    Examples:
+        >>> Integrando(1)
+        0.081...
+        >>> Integrando(np.array([1,2]))
+        array([0.081..., 58.909...])
+    """
     return x**6 - (x**2 * np.sin(2*x))
 
 def Gaussxw(N):
+
+    """
+    Calcula puntos y pesos de la cuadratura:
+
+    Args:
+        N (int): Número de nodos.
+
+    Returns:
+        tuple: (x, w) donde x son los puntos y w los pesos.
+
+    Examples:
+        >>> x, w = Gaussxw(3)
+        >>> len(x)
+        3
+    """
     x,w = np.polynomial.legendre.leggauss(N)
     return x,w 
 
 def Gaussxw_ab (a,b,x,w):
+
+    """
+    Transforma puntos y pesos de [-1,1] a [a,b].
+
+    Args:
+        a (float): Límite inferior del intervalo.
+        b (float): Límite superior del intervalo.
+        x (np.ndarray): Puntos en [-1,1].
+        w (np.ndarray): Pesos en [-1,1].
+
+    Returns:
+        tuple: (x_ab, w_ab) nodos y pesos transformados al intervalo [a,b].
+
+    Examples:
+        >>> x, w = Gaussxw(3)
+        >>> x_ab, w_ab = Gaussxw_ab(1, 3, x, w)
+    """
+
     return 0.5 * (b-a) * x + 0.5 * (b+a), 0.5 * (b-a) * w
 
 x_2, w_2 = Gaussxw(2)
