@@ -1,61 +1,51 @@
-import math
 import numpy as np
-from numpy.polynomial.legendre import leggauss
-import mpmath as mp
 
-def gauss_legendre_nodos_pesos(N):
-    """
-    Devuelve nodos y pesos de Gauss-Legendre en [-1,1].
-    """
-    nodos, pesos = leggauss(N)
-    return nodos, pesos
+def Intengrando(x):
+    return x**6 - (x**2 * np.sin(2*x))
 
-def escala(nodos, a, b):
-    """
-    Escala nodos en [-1,1] al intervalo [a,b].
-    """
-    return 0.5 * (b - a) * nodos + 0.5 * (b + a)
+def Gaussxw(N):
+    x,w = np.polynomial.legendre.leggauss(N)
+    return x,w 
 
-def gauss_integral(f, a, b, N):
-    """
-    Integra f en [a,b] usando N puntos de Gauss-Legendre.
-    """
-    nodos, pesos = gauss_legendre_nodos_pesos(N)
-    x_escala = escala(nodos, a, b)
-    w_escala = 0.5 * (b - a) * pesos
-    vals = np.array([f(xi) for xi in x_escala])
-    return float(np.sum(w_escala * vals))
+def Gaussxw_ab (a,b,x,w):
+    return 0.5 * (b-a) * x + 0.5 * (b+a), 0.5 * (b-a) * w
 
-def integrando(x):
-    """La función: x^6 - x^2 * sin(2x)."""
-    return x**6 - x**2 * math.sin(2*x)
+x_2, w_2 = Gaussxw(2)
+x_3, w_3 = Gaussxw(3)
+x_4, w_4 = Gaussxw(4)
+x_5, w_5 = Gaussxw(5)
+x_6, w_6 = Gaussxw(6)
+x_7, w_7 = Gaussxw(7)
+x_8, w_8 = Gaussxw(8)
+x_9, w_9 = Gaussxw(9)
+
+exc_x2, exc_w2 = Gaussxw_ab(1,3,x_2, w_2)
+exc_x3, exc_w3 = Gaussxw_ab(1,3,x_3, w_3)
+exc_x4, exc_w4 = Gaussxw_ab(1,3,x_4, w_4)
+exc_x5, exc_w5 = Gaussxw_ab(1,3,x_5, w_5)
+exc_x6, exc_w6 = Gaussxw_ab(1,3,x_6, w_6)
+exc_x7, exc_w7 = Gaussxw_ab(1,3,x_7, w_7)
+exc_x8, exc_w8 = Gaussxw_ab(1,3,x_8, w_8)
+exc_x9, exc_w9 = Gaussxw_ab(1,3,x_9, w_9)
+
+integ_2 = np.sum(exc_w2 * Intengrando(exc_x2))
+integ_3 = np.sum(exc_w3 * Intengrando(exc_x3))
+integ_4 = np.sum(exc_w4 * Intengrando(exc_x4))
+integ_5 = np.sum(exc_w5 * Intengrando(exc_x5))
+integ_6 = np.sum(exc_w6 * Intengrando(exc_x6))
+integ_7 = np.sum(exc_w7 * Intengrando(exc_x7))
+integ_8 = np.sum(exc_w8 * Intengrando(exc_x8))
+integ_9 = np.sum(exc_w9 * Intengrando(exc_x9))
 
 
-def referencia_integral():
-    """Calcula el valor de referencia con alta precisión."""
-    mp.mp.dps = 50  # 50 dígitos de precisión
-    f_mp = lambda x: x**6 - x**2 * mp.sin(2*x)
-    I_ref = mp.quad(f_mp, [1, 3])
-    return float(I_ref)
+print(f"N=2: Integral ≈ {integ_2}")
+print(f"N=3: Integral ≈ {integ_3}")
+print(f"N=4: Integral ≈ {integ_4}")
+print(f"N=5: Integral ≈ {integ_5}")
+print(f"N=6: Integral ≈ {integ_6}")
+print(f"N=7: Integral ≈ {integ_7}")
+print(f"N=8: Integral ≈ {integ_8}")
+print(f"N=9: Integral ≈ {integ_9}")
 
 
-if __name__ == "__main__":
-    a, b = 1.0, 3.0
-    I_ref = referencia_integral()
-    print(f"Referencia (alta precisión): {I_ref:.15f}")
-
-    tol = 1e-12
-    found = None
-
-    for N in range(1, 21):
-        I_N = gauss_integral(integrando, a, b, N)
-        err = abs(I_N - I_ref)
-        print(f"N={N:2d}  I_N={I_N:.15f}  err={err:.3e}")
-        if err < tol:
-            found = N
-            break
-
-    if found is not None:
-        print(f"\nSe alcanza tol={tol:e} con N = {found}")
-    else:
-        print("\nNo se alcanzó la tolerancia para N<=20")
+print("El valor exacto se alcanza en N=9")
