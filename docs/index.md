@@ -1,17 +1,11 @@
-# Welcome to MkDocs
+##Introducción al problema
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+En la presente tarea se implementa el método de la Cuadratura Gaussiana basada en los polinomios de Legendre el cual  permite realizar aproximaciones bastante precisas de integrales definidas. 
 
-## Commands
+A continuación se utilizará el método anteriormente mencionado para aproximar el cálculo de la integral: 
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+$$
+\int_{1}^{3} (x^6 - x^2 \sin(2x))  dx
+$$
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Además de determinar el número mínimo de puntos necesarios para obtener una aproximación con un error menor a $10^{-12}$ de orden de magnitud.   
