@@ -1,2 +1,2 @@
-::: cuadratura
+::: cuadrature
 
