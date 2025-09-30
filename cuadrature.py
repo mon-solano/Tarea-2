@@ -1,6 +1,6 @@
 import numpy as np
 
-def Intengrando(x):
+def Integrando(x):
     return x**6 - (x**2 * np.sin(2*x))
 
 def Gaussxw(N):
@@ -28,14 +28,14 @@ exc_x7, exc_w7 = Gaussxw_ab(1,3,x_7, w_7)
 exc_x8, exc_w8 = Gaussxw_ab(1,3,x_8, w_8)
 exc_x9, exc_w9 = Gaussxw_ab(1,3,x_9, w_9)
 
-integ_2 = np.sum(exc_w2 * Intengrando(exc_x2))
-integ_3 = np.sum(exc_w3 * Intengrando(exc_x3))
-integ_4 = np.sum(exc_w4 * Intengrando(exc_x4))
-integ_5 = np.sum(exc_w5 * Intengrando(exc_x5))
-integ_6 = np.sum(exc_w6 * Intengrando(exc_x6))
-integ_7 = np.sum(exc_w7 * Intengrando(exc_x7))
-integ_8 = np.sum(exc_w8 * Intengrando(exc_x8))
-integ_9 = np.sum(exc_w9 * Intengrando(exc_x9))
+integ_2 = np.sum(exc_w2 * Integrando(exc_x2))
+integ_3 = np.sum(exc_w3 * Integrando(exc_x3))
+integ_4 = np.sum(exc_w4 * Integrando(exc_x4))
+integ_5 = np.sum(exc_w5 * Integrando(exc_x5))
+integ_6 = np.sum(exc_w6 * Integrando(exc_x6))
+integ_7 = np.sum(exc_w7 * Integrando(exc_x7))
+integ_8 = np.sum(exc_w8 * Integrando(exc_x8))
+integ_9 = np.sum(exc_w9 * Integrando(exc_x9))
 
 
 print(f"N=2: Integral ≈ {integ_2}")
